@@ -2,12 +2,11 @@ package post;
 
 import RestAssuredCore.BaseAssertion;
 import RestAssuredCore.RESTCalls;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.TestUtils;
-import utils.URL;
+
 
 public class GetCall {
     @Test

@@ -7,7 +7,7 @@
 <test name = "API_Test">
     <classes>
 
-        <!--<class name="post.GetCall"/>-->
+        <class name="post.GetCall"/>
         <class name="post.Comment"/>
 
     </classes>

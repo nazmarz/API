@@ -3,7 +3,6 @@ import RestAssuredCore.RESTCalls;
 import com.google.gson.Gson;
 import  com.google.gson.GsonBuilder;
 import io.restassured.response.Response;
-import io.restassured.response.ResponseBody;
 import org.testng.annotations.Test;
 import utils.TestUtils;
 
@@ -67,10 +66,8 @@ public class Comment {
         Response response = RESTCalls.GETRequest("https://jsonplaceholder.typicode.com/comments");
         String bodyStringValue = TestUtils.getResposeString(response);
         Gson gson = new GsonBuilder().create();
-//        Comment comment = gson.fromJson(bodyStringValue, Comment.class);
         Comment[] comment = gson.fromJson(bodyStringValue, Comment[].class);
-        System.out.println(comment);
-        System.out.println("This is a test");
+
     }
 
 }
