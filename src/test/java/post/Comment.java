@@ -65,10 +65,10 @@ public class Comment {
         //Retrieving comments from endpoint /comments and deserializing response into the collection of objects 'Comment'
         Comment[] myDeserializedComments = get("https://jsonplaceholder.typicode.com/comments").as(Comment[].class);
 
-        /* This is to check that the de-serialization was successful
+        //This is to check that the de-serialization was successful
         for(int i=0; i<myDeserializedComments.length; i++){
             System.out.println(myDeserializedComments[i].toString());
-        }*/
+        }
 
         // Removes all comments from the collection that has postId different than 1
         Comment[] myFilteredComments = new Comment[myDeserializedComments.length];
