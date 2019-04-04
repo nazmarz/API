@@ -1,10 +1,7 @@
 package post;
-import RestAssuredCore.RESTCalls;
-import com.google.gson.Gson;
-import  com.google.gson.GsonBuilder;
-import io.restassured.response.Response;
+
 import org.testng.annotations.Test;
-import utils.TestUtils;
+import static io.restassured.RestAssured.get;
 
 public class Comment {
 
@@ -54,6 +51,7 @@ public class Comment {
         this.body = body;
     }
 
+
     @Override
     public String toString() {
         return "Comment [postId=" + postId + ", id=" + id
@@ -62,17 +60,49 @@ public class Comment {
     }
 
     @Test
-    public void getCall() {
-        Response response = RESTCalls.GETRequest("https://jsonplaceholder.typicode.com/comments");
-        String bodyStringValue = TestUtils.getResposeString(response);
-        Gson gson = new GsonBuilder().create();
-        Comment[] comment = gson.fromJson(bodyStringValue, Comment[].class);
+    public void commentsDeserialization() {
 
+        //Retrieving comments from endpoint /comments and deserializing response into the collection of objects 'Comment'
+        Comment[] myDeserializedComments = get("https://jsonplaceholder.typicode.com/comments").as(Comment[].class);
+
+        /* This is to check that the de-serialization was successful
+        for(int i=0; i<myDeserializedComments.length; i++){
+            System.out.println(myDeserializedComments[i].toString());
+        }*/
+
+        // Removes all comments from the collection that has postId different than 1
+        Comment[] myFilteredComments = new Comment[myDeserializedComments.length];
+        int j = 0;
+        for (int i = 0; i < myDeserializedComments.length; i++) {
+            if ((myDeserializedComments[i].getPostId()).equals("1")) {
+                myFilteredComments[j++] = myDeserializedComments[i];
+            }
+        }
+
+        for(int i=0; i<myFilteredComments.length; i++){
+            if (myFilteredComments[i]!=null) {
+                System.out.println(myFilteredComments[i].toString());
+            }
+        }
+
+        //Removes all comments that do not contain word "non" in the body
+        Comment[] myNonComments = new Comment[myDeserializedComments.length];
+        int k = 0;
+        for (int i = 0; i < myDeserializedComments.length; i++) {
+            if ((myDeserializedComments[i].getBody()).contains("non")) {
+                myNonComments[k++] = myDeserializedComments[i];
+            }
+        }
+
+        for (int i = 0; i < myNonComments.length; i++) {
+            if (myNonComments[i] != null) {
+                System.out.println(myNonComments[i].toString());
+
+            }
+
+        }
     }
-
 }
-
-
 
 
 

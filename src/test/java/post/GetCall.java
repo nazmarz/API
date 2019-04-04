@@ -19,13 +19,13 @@ public class GetCall {
         BaseAssertion.verifyStatusCode(response,200);
 
         //Asserting that the number of comments is 500 (greater than 0)
-        int sizeOfList = response.body().path("list.size()");;
+        int sizeOfList = response.body().path("list.size()");
         Assert.assertEquals(sizeOfList,500);
 
         //Asserting that the body has comment with email: "Jayne_Kuhic@sydney.com"
-
         String bodyStringValue = TestUtils.getResposeString(response);
         Assert.assertTrue(bodyStringValue.contains("Jayne_Kuhic@sydney.com"));
+
     }
 
 
